@@ -78,7 +78,7 @@
 
 ```
 作用：
-	相当于class组件中的 setState({})
+	相当于class组件中的 state、setState({})
 	
 步骤：
 	1、从React包中导入 useState
@@ -93,5 +93,38 @@
 	
 其它：
 	可以使用 eslint-plugin-react-hooks 这个插件来检测useState书写是否正确
+```
+
+> useEffect
+
+```
+作用：
+	执行副作用，比如绑定事件、网络请求、访问Dom
+	
+好处：
+	关注点分离
+	事件绑定与解绑写在一起，不容易遗漏
+	
+语法：
+	useEffect(() => {
+		// 在mount和update之后，都会执行到这里的代码
+	}) 没有第二个参数，每次都会执行代码
+	
+	useEffect(() => {
+		// 有点类似于componentDidMount
+		绑定事件
+		
+		return () => { // 有点类似于 componentWillUnMount
+			解绑事件
+		}
+	},[]) // 空数组，只会执行一次，在 componentDidMount 中绑定事件
+	在 componentWillUnMount 解绑事件
+	
+	useEffect(() => {
+		console.log('只有当数组中的模型值发生改变的时候才会执行...')
+	},[模型值])
+	
+其它：
+	useEffect其实就相当于在替代 componentDidMount、componentDidUpdate、componentWillUnMount
 ```
 
