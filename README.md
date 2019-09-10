@@ -128,3 +128,46 @@
 	useEffect其实就相当于在替代 componentDidMount、componentDidUpdate、componentWillUnMount
 ```
 
+> useContext
+
+```
+作用：
+	跨层级组件传递数据
+	
+语法：
+	const count = useContext(CountContext)
+```
+
+> useMemo
+
+```
+作用：
+	决定组件是否重新渲染，用来解决重复渲染的问题
+	
+语法：
+	useMemo(() => {
+		return count * 2
+	},[count]) // 当count每次变化的时候，回调函数就会执行
+	
+	useMemo(() => {
+		return count * 2
+	},[count === 3]) // 当count === 3 的时候，回调函数就会执行
+	
+其它：
+	在渲染前执行,跟useEffect不一样
+```
+
+> useCallBack
+
+```
+作用：useMemo的简化写法，只生成一个事件句柄
+
+语法：
+	useCallback(() => {
+		
+	},[]) // 设置为[] 里面的代码只会执行一次
+	
+和useMemo的关系
+useMemo(() => fn) 这种写法和 useCallback(fn) 等价，所以说userCallback是useMome的简写
+```
+
