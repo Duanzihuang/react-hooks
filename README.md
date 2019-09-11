@@ -142,6 +142,7 @@
 
 ```
 作用：
+	优化性能
 	决定组件是否重新渲染，用来解决重复渲染的问题
 	
 语法：
@@ -160,7 +161,9 @@
 > useCallBack
 
 ```
-作用：useMemo的简化写法，只生成一个事件句柄
+作用：
+	优化性能
+	useMemo的简化写法，只生成一个事件句柄
 
 语法：
 	useCallback(() => {
@@ -169,5 +172,10 @@
 	
 和useMemo的关系
 useMemo(() => fn) 这种写法和 useCallback(fn) 等价，所以说userCallback是useMome的简写
+
+应用场景：
+	把函数作为参数传递给子组件,如果不需要传递则不需要使用useCallback
 ```
+
+### Todos
 

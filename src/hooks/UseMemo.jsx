@@ -43,9 +43,24 @@ function UseState() {
   // },[]) // 函数句柄只会执行一次
 
   // 和上面的等价
+  //   const onClick = useCallback(() => {
+  //     console.log("ok333");
+  //   }, []); // 函数句柄只会执行一次
+
+  // 如果想要useCallback中的代码有条件执行多次
+  const [countClick, setCountClick] = useState(0);
+  //   const onClick = useCallback(() => {
+  //     console.log("ok666");
+
+  //     setCountClick(countClick + 1)
+  //   }, [countClick,setCountClick]); //可以省略 setCountClick 参考：https://zh-hans.reactjs.org/docs/hooks-reference.html#usestate
+
+  // 和上面等价
   const onClick = useCallback(() => {
-    console.log("ok333");
-  }, []); // 函数句柄只会执行一次
+    console.log("ok666");
+
+    setCountClick(countClick => countClick + 1);
+  }, []);
 
   return (
     <div>

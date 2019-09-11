@@ -3,6 +3,7 @@ import UseState from './hooks/UseState'
 import UseEffect from './hooks/UseEffect'
 import UseContext from './hooks/UseContext'
 import UseMemo from './hooks/UseMemo'
+import Todos from './todos/Index'
 
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
       {/* <UseState /> */}
       {/* <UseEffect /> */}
       {/* <UseContext /> */}
-      <UseMemo />
+      {/* <UseMemo /> */}
+      <Todos />
     </div>
   );
 }
