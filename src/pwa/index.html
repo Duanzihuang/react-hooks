@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<link>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="./index.css"></link>
+</head>
+<body>
+    <h1>PWA</h1>
+    <script>
+        navigator.serviceWorker.register('./sw.js',{scope:'/'}).then(
+            registration => {
+                console.log(registration)
+            },error => {
+                console.log(error)
+            }
+        )
+    </script>
+</body>
+</html>

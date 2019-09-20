@@ -4,7 +4,7 @@ import UseEffect from './hooks/UseEffect'
 import UseContext from './hooks/UseContext'
 import UseMemo from './hooks/UseMemo'
 import Todos from './todos/Index'
-
+import SelfCount from './hooks/SelfHook'
 
 function App() {
   return (
@@ -13,7 +13,8 @@ function App() {
       {/* <UseEffect /> */}
       {/* <UseContext /> */}
       {/* <UseMemo /> */}
-      <Todos />
+      {/* <Todos /> */}
+      <SelfCount />
     </div>
   );
 }
