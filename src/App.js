@@ -14,7 +14,7 @@ function App() {
       {/* <UseContext /> */}
       {/* <UseMemo /> */}
       {/* <Todos /> */}
-      <SelfCount />
+      {/* <SelfCount /> */}
     </div>
   );
 }
