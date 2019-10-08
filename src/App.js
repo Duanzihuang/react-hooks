@@ -5,6 +5,10 @@ import UseContext from './hooks/UseContext'
 import UseMemo from './hooks/UseMemo'
 import Todos from './todos/Index'
 import SelfCount from './hooks/SelfHook'
+import SelfCount2 from './hooks/SelfHook2'
+import UseLayoutEffect from './hooks/UseLayoutEffect'
+import UseReducer from './hooks/UseReducer'
+import UseRef from './hooks/UseRef'
 
 function App() {
   return (
@@ -15,6 +19,10 @@ function App() {
       {/* <UseMemo /> */}
       {/* <Todos /> */}
       {/* <SelfCount /> */}
+      {/* <SelfCount2 /> */}
+      <UseLayoutEffect />
+      {/* <UseReducer /> */}
+      {/* <UseRef /> */}
     </div>
   );
 }

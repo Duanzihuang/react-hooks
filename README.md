@@ -127,7 +127,26 @@
 其它：
 	useEffect其实就相当于在替代 componentDidMount、componentDidUpdate、componentWillUnMount
 ```
+> useLayoutEffect
+```
+处理跟DOM相关的副作用
+useLayoutEffect中的副作用会在DOM更新之后同步执行
 
+function App() {
+    const [width, setWidth] = useState(0);
+    useLayoutEffect(() => {
+        const title = document.querySelector('#title');
+        const titleWidth = title.getBoundingClientRect().width;
+        if (width !== titleWidth) {
+            setWidth(titleWidth);
+        }
+    });
+    return <div>
+        <h1 id="title">hello</h1>
+        <h2>{width}</h2>
+    </div>
+}
+```
 > useContext
 
 ```
@@ -177,10 +196,79 @@ useMemo(() => fn) 这种写法和 useCallback(fn) 等价，所以说userCallback
 	把函数作为参数传递给子组件,如果不需要传递则不需要使用useCallback
 ```
 
-> 自定义Hooks
+> 自定义Hooks【使用到useEffect】
 
 ```
+import React,{useState,useEffect} from 'react'
 
+function useIncrementTimer(){
+    const [count,setCount] = useState(0)
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCount(count + 1)
+        },1000)
+
+        return () => {
+            clearInterval(timer)
+        }
+    })
+
+    return count
+}
+
+function SelfHook() {
+    const count = useIncrementTimer()
+    return <div> 
+        <p style={{color:count % 2 === 0 ? 'red' : 'blue'}}>自定义Hook</p>
+    </div>
+}
+
+export default SelfHook
+```
+
+> useReducer
+
+```
+实现部分reducer的功能
+
+const reducer = (state, action) => {
+    switch(action.type) {
+        case 'increment':
+            return {count: state.count + 1};
+        case 'decrement':
+            return {count: state.count - 1};
+        case 'reset':
+            return initState;
+        default:
+            return state;
+    }
+};
+
+function App() {
+    const [state, dispatch] = useReducer(reducer, initState);
+    return <div>
+        <h1>{state.count}</h1>
+        <button onClick={() => dispatch({type: 'increment'})}>+</button>
+        <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+        <button onClick={() => dispatch({type: 'reset'})}>reset</button>
+    </div>
+}
+```
+
+> useRef
+
+```
+获取Dom节点
+
+function App() {
+    const inputRef = useRef(null);
+
+    return <div>
+        <input type="text" ref={inputRef}/>
+        <button onClick={() => inputRef.current.focus()}>focus</button>
+    </div>
+}
 ```
 
 ### Todos
