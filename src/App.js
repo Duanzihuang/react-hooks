@@ -10,6 +10,7 @@ import UseLayoutEffect from './hooks/UseLayoutEffect'
 import UseReducer from './hooks/UseReducer'
 import UseRef from './hooks/UseRef'
 import Demo1 from './hooks/SearchDemo/Demo1'
+import Demo2 from './hooks/SearchDemo/Demo2'
 
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
       {/* <UseLayoutEffect /> */}
       {/* <UseReducer /> */}
       {/* <UseRef /> */}
-      <Demo1 />
+      {/* <Demo1 /> */}
+      <Demo2 />
     </div>
   );
 }
