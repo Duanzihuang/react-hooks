@@ -11,11 +11,11 @@ module.exports = function override(config, env) {
 
   // 修改plugins
   // config.plugins = [
-    // new HtmlWebpackPlugin({
-    //   template:'./public/index.html',
-    //   filename:'index.html',
-    //   chunks:['index']
-    // }),
+  //   new HtmlWebpackPlugin({
+  //     template:'./public/index.html',
+  //     filename:'index.html',
+  //     chunks:['index']
+  //   }),
     // new HtmlWebpackPlugin({
     //   template:'./public/query.html',
     //   filename:'query.html',
@@ -31,7 +31,17 @@ module.exports = function override(config, env) {
     //   filename:'order.html',
     //   chunks:['order']
     // })
-  //]
+  // ]
+
+  // 设置跨域
+  config.devServer = {
+    proxy: {
+      "/api": {
+        "target": "http://localhost:5000/", //后端地址
+        "changeOrigin": true
+      }
+    }
+  }
 
   return config
 }

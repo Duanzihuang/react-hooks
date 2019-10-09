@@ -94,8 +94,29 @@ export function hideDateSelector() {
 export function exchangeFromTo() {
   return (dispatch, getState) => {
     const { from, to } = getState()
-    console.log(from, to)
+    // console.log(from, to)
     dispatch(setFrom(to))
     dispatch(setTo(from))
+  }
+}
+
+export function fetchCityData() {
+  return (dispatch,getState) => {
+    const {isLoadingCityData,cityData} = getState()
+
+    if (isLoadingCityData || cityData) {
+      return 
+    }
+
+    // 开发发送网络请求
+    dispatch(setIsLoadingCityData(true))
+
+    // 发送网路请求获取
+    fetch('/rest/cities?_'+Date.now()).then(res => res.json()).then(data => {
+      console.log(data)
+      dispatch(setIsLoadingCityData(false))
+    }).catch(() => {
+      dispatch(setIsLoadingCityData(false))
+    })
   }
 }

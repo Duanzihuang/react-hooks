@@ -9,6 +9,7 @@ import SelfCount2 from './hooks/SelfHook2'
 import UseLayoutEffect from './hooks/UseLayoutEffect'
 import UseReducer from './hooks/UseReducer'
 import UseRef from './hooks/UseRef'
+import Demo1 from './hooks/SearchDemo/Demo1'
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
       {/* <Todos /> */}
       {/* <SelfCount /> */}
       {/* <SelfCount2 /> */}
-      <UseLayoutEffect />
+      {/* <UseLayoutEffect /> */}
       {/* <UseReducer /> */}
       {/* <UseRef /> */}
+      <Demo1 />
     </div>
   );
 }

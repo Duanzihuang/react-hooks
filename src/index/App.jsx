@@ -7,13 +7,21 @@ import Journey from './Journey'
 import DepartDate from './DepartDate'
 import HignSpeed from './HignSpeed'
 import Submit from './Submit'
+import CitySelector from '../common/CitySelector'
 
 import { bindActionCreators } from 'redux'
 
-import { exchangeFromTo, showCitySelector } from './actions'
+import { exchangeFromTo, showCitySelector, hideCitySelector,fetchCityData } from './actions'
 
 function App(props) {
-  const { from, to, dispatch } = props
+  const {
+    from,
+    to,
+    dispatch,
+    isCitySelectorVisible,
+    cityData,
+    isLoadingCityData
+  } = props
 
   // 使用 useCallback 避免Header不必要的重渲染
   const onBack = useCallback(() => {
@@ -47,6 +55,16 @@ function App(props) {
     )
   }, [])
 
+  const citySelectorCbs = useMemo(() => {
+    return bindActionCreators(
+      {
+        onBack: hideCitySelector,
+        fetchCityData
+      },
+      dispatch
+    )
+  }, [])
+
   return (
     <div>
       <div className="header-wrapper">
@@ -63,6 +81,12 @@ function App(props) {
         <HignSpeed />
         <Submit />
       </form>
+      <CitySelector
+        show={isCitySelectorVisible}
+        cityData={cityData}
+        isLoading={isLoadingCityData}
+        {...citySelectorCbs}
+      ></CitySelector>
     </div>
   )
 }
