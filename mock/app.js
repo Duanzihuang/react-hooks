@@ -1,10 +1,25 @@
 const express = require('express')
+const fs = require('fs')
+const path = require('path')
 
 const app = express()
 app.get('/rest', (req, res) => {
   res.json({
     status: 1,
     message: 'request ok'
+  })
+})
+
+app.get('/rest/cities', (req, res) => {
+  // res.json({
+  //   status: 1,
+  //   message: 'request ok'
+  // })
+  const cities = fs.readFileSync(path.join(__dirname, './rest/cities.json'))
+
+  res.json({
+    status: 1,
+    message: JSON.parse(cities)
   })
 })
 

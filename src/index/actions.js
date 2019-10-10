@@ -32,6 +32,13 @@ export function setIsLoadingCityData(isLoadingCityData) {
   }
 }
 
+export function setCityData(cityData) {
+  return {
+    type: ACTION_SET_CITY_DATA,
+    payload: cityData
+  }
+}
+
 export function toggleHignSpeed() {
   return (dispatch, getState) => {
     const { hignSpeed } = getState()
@@ -108,12 +115,27 @@ export function fetchCityData() {
       return 
     }
 
-    // 开发发送网络请求
+    // 判断缓存是否可用
+    const cache = JSON.parse(localStorage.getItem('city_data_cache') || '{}')
+    if (Date.now() < cache.expires) {
+      dispatch(setCityData(cache.data))
+      return
+    }
+
+    // 开始发送网络请求
     dispatch(setIsLoadingCityData(true))
 
     // 发送网路请求获取
-    fetch('/rest/cities?_'+Date.now()).then(res => res.json()).then(data => {
-      console.log(data)
+    fetch('/rest/cities?_'+Date.now()).then(res => res.json()).then(cityData => {
+      // console.log(cityData)
+      dispatch(setCityData(cityData.message))
+
+      // 缓存到本地
+      localStorage.setItem('city_data_cache',JSON.stringify({
+        expires: Date.now() + 60 * 1000,
+        data: cityData.message
+      }))
+
       dispatch(setIsLoadingCityData(false))
     }).catch(() => {
       dispatch(setIsLoadingCityData(false))
