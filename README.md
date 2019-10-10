@@ -196,7 +196,15 @@ useMemo(() => fn) 这种写法和 useCallback(fn) 等价，所以说userCallback
 应用场景：
 	把函数作为参数传递给子组件,如果不需要传递则不需要使用useCallback
 ```
-
+> useCallback & useMemo
+```
+相同点：
+	都能进行性能优化
+	
+不同点：
+	useMemo返回缓存的变量
+	useCallback返回缓存的函数
+```
 > 自定义Hooks【使用到useEffect】
 
 ```

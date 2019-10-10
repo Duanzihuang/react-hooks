@@ -2,6 +2,7 @@ import React from 'react';
 import UseState from './hooks/UseState'
 import UseEffect from './hooks/UseEffect'
 import UseContext from './hooks/UseContext'
+import UseCallback from './hooks/UseCallback'
 import UseMemo from './hooks/UseMemo'
 import Todos from './todos/Index'
 import SelfCount from './hooks/SelfHook'
@@ -18,6 +19,7 @@ function App() {
       {/* <UseState /> */}
       {/* <UseEffect /> */}
       {/* <UseContext /> */}
+      <UseCallback />
       {/* <UseMemo /> */}
       {/* <Todos /> */}
       {/* <SelfCount /> */}
@@ -26,7 +28,7 @@ function App() {
       {/* <UseReducer /> */}
       {/* <UseRef /> */}
       {/* <Demo1 /> */}
-      <Demo2 />
+      {/* <Demo2 /> */}
     </div>
   );
 }
