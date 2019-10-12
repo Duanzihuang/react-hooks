@@ -8,10 +8,19 @@ import DepartDate from './DepartDate'
 import HignSpeed from './HignSpeed'
 import Submit from './Submit'
 import CitySelector from '../common/CitySelector'
+import DateSelector from '../common/DateSelector'
 
 import { bindActionCreators } from 'redux'
 
-import { exchangeFromTo, showCitySelector, hideCitySelector,fetchCityData,setSelectedCity } from './actions'
+import {
+  exchangeFromTo,
+  showCitySelector,
+  hideCitySelector,
+  fetchCityData,
+  setSelectedCity,
+  showDateSelector,
+  hideDateSelector
+} from './actions'
 
 function App(props) {
   const {
@@ -19,8 +28,10 @@ function App(props) {
     to,
     dispatch,
     isCitySelectorVisible,
+    isDateSelectorVisible,
     cityData,
-    isLoadingCityData
+    isLoadingCityData,
+    departDate
   } = props
 
   // 使用 useCallback 避免Header不必要的重渲染
@@ -66,6 +77,18 @@ function App(props) {
     )
   }, [])
 
+  const departDateCbs = useMemo(() => {
+    return bindActionCreators({
+      onClick: showDateSelector
+    }, dispatch)
+  }, [])
+
+  const dateSelectorCbs = useMemo(() => {
+    return bindActionCreators({
+      onBack: hideDateSelector
+    },dispatch)
+  }, [])
+
   return (
     <div>
       <div className="header-wrapper">
@@ -78,9 +101,9 @@ function App(props) {
         {/* 使用 useMemo  */}
         <Journey from={from} to={to} {...cbs} />
 
-        <DepartDate />
-        <HignSpeed />
-        <Submit />
+        <DepartDate time={departDate} {...departDateCbs}/>
+        {/* <HignSpeed />
+        <Submit /> */}
       </form>
       <CitySelector
         show={isCitySelectorVisible}
@@ -88,6 +111,7 @@ function App(props) {
         isLoading={isLoadingCityData}
         {...citySelectorCbs}
       ></CitySelector>
+      <DateSelector show={isDateSelectorVisible} {...dateSelectorCbs}/>
     </div>
   )
 }

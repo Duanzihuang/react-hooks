@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "classnames": "^2.2.6",
+    "dayjs": "^1.8.16",
     "express": "^4.17.1",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
