@@ -23,6 +23,26 @@ app.get('/rest/cities', (req, res) => {
   })
 })
 
+app.get('/rest/search', (req, res) => {
+  return res.json({
+    result: [
+      {
+        key: '芜湖',
+        display: '芜湖'
+      },
+      {
+        key: '井冈山',
+        display: '井冈山'
+      },
+      {
+        key: '铁岭',
+        display: '铁岭'
+      }
+    ],
+    searchKey: req.query.key
+  })
+})
+
 app.get('/api/search', (req, res) => {
   const query = req.query.query
 
