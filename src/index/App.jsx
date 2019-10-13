@@ -5,7 +5,7 @@ import './App.css'
 import Header from '../common/Header'
 import Journey from './Journey'
 import DepartDate from './DepartDate'
-import HignSpeed from './HignSpeed'
+import HighSpeed from './HighSpeed'
 import Submit from './Submit'
 import CitySelector from '../common/CitySelector'
 import DateSelector from '../common/DateSelector'
@@ -20,7 +20,8 @@ import {
   setSelectedCity,
   showDateSelector,
   hideDateSelector,
-  setDepartDate
+  setDepartDate,
+  toggleHighSpeed
 } from './actions'
 
 import { h0 } from '../common/fp'
@@ -34,7 +35,8 @@ function App(props) {
     isDateSelectorVisible,
     cityData,
     isLoadingCityData,
-    departDate
+    departDate,
+    highSpeed
   } = props
 
   // 使用 useCallback 避免Header不必要的重渲染
@@ -92,6 +94,12 @@ function App(props) {
     },dispatch)
   }, [])
 
+  const highSpeedCbs = useMemo(() => {
+    return bindActionCreators({
+      toggle: toggleHighSpeed
+    },dispatch)
+  },[])
+
   const onSelectDate = useCallback(day => {
     if (!day) {
       return 
@@ -110,7 +118,7 @@ function App(props) {
       <div className="header-wrapper">
         <Header onBack={onBack} title="火车票" />
       </div>
-      <form className="form">
+      <form action="./query.html" className="form">
         {/* 使用 useCallBack */}
         {/* <Journey from={from} to={to} exchangeFromTo={doExchangeFromTo} showCitySelector={doShowCitySelector}/> */}
 
@@ -118,8 +126,8 @@ function App(props) {
         <Journey from={from} to={to} {...cbs} />
 
         <DepartDate time={departDate} {...departDateCbs}/>
-        {/* <HignSpeed />
-        <Submit /> */}
+        <HighSpeed {...highSpeedCbs} hignSpeed={highSpeed}/>
+        <Submit />
       </form>
       <CitySelector
         show={isCitySelectorVisible}

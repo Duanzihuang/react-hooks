@@ -14,9 +14,9 @@ export default createStore(combineReducers(reducers),{
     from: '北京',
     to: '上海',
     isCitySelectorVisible: false,
-    currentSelecingLeftCity: false,
+    // currentSelecingLeftCity: false,
     cityData: null,
     isLoadingCityData: false,
     isDateSelectorVisible: false,
-    hignSpeed: false
+    highSpeed: false
 },composeEnhancers(applyMiddleware(thunk)))
