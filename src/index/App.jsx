@@ -19,8 +19,11 @@ import {
   fetchCityData,
   setSelectedCity,
   showDateSelector,
-  hideDateSelector
+  hideDateSelector,
+  setDepartDate
 } from './actions'
+
+import { h0 } from '../common/fp'
 
 function App(props) {
   const {
@@ -89,6 +92,19 @@ function App(props) {
     },dispatch)
   }, [])
 
+  const onSelectDate = useCallback(day => {
+    if (!day) {
+      return 
+    }
+
+    if (day < h0()) {
+      return
+    }
+
+    dispatch(setDepartDate(day))
+    dispatch(hideDateSelector())
+  },[])
+
   return (
     <div>
       <div className="header-wrapper">
@@ -111,7 +127,7 @@ function App(props) {
         isLoading={isLoadingCityData}
         {...citySelectorCbs}
       ></CitySelector>
-      <DateSelector show={isDateSelectorVisible} {...dateSelectorCbs}/>
+      <DateSelector onSelect={onSelectDate} show={isDateSelectorVisible} {...dateSelectorCbs}/>
     </div>
   )
 }

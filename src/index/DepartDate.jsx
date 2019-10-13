@@ -10,19 +10,20 @@ export default function DepartDate(props){
         onClick
     } = props
 
+    // console.log('time is ',time)
     const h0OfDepart = h0(time)
     const departDate = new Date(h0OfDepart)
-    console.log('h0OfDepart is ',h0OfDepart)
+    // console.log('h0OfDepart is ',h0OfDepart)
 
     const departDateString = useMemo(() => {
         const date = dayjs(h0OfDepart).format('YYYY-MM-DD')
 
-        console.log('date is ',date)
+        // console.log('date is ',date)
 
         return date
     }, [h0OfDepart])
 
-    console.log("day is ",departDate.getDay())
+    // console.log("day is ",departDate.getDay())
     // 判断是否是今天
     const isToday = h0OfDepart === h0()
     const weekString = '周' + ['日','一','二','三','四','五','六'][departDate.getDay()] + (isToday ? '(今天)' : '')
