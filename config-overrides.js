@@ -9,6 +9,11 @@ module.exports = function override(config, env) {
     // order: './src/order/index.js'
   }
 
+  // * 多页面一定要配置打包的多出口
+  config.output = {
+    filename:'static/js/[name].js'
+  }
+
   // 修改plugins
   config.plugins = [
     new HtmlWebpackPlugin({
