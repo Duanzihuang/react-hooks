@@ -43,6 +43,14 @@ app.get('/rest/search', (req, res) => {
   })
 })
 
+app.get('/api/query',(req,res) => {
+  const response = require('./rest/query.json')
+
+  response.dataMap.directTrainInfo.trains = response.dataMap.directTrainInfo.trains.reverse()
+
+  res.json(response)
+})
+
 app.get('/api/search', (req, res) => {
   const query = req.query.query
 

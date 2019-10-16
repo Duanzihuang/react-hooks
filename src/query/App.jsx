@@ -8,6 +8,7 @@ import Bottom from './Bottom'
 import Header from '../common/Header'
 import { h0 } from '../common/fp'
 import dayjs from 'dayjs'
+import useNav from '../common/useNav'
 
 import {
   setFrom,
@@ -19,11 +20,14 @@ import {
   setTicketTypes,
   setTrainTypes,
   setDepartStations,
-  setArriveStations
+  setArriveStations,
+  prevDate,
+  nextDate
 } from './actions'
 
 function App(props) {
   const {
+    trainList,
     from,
     to,
     departDate,
@@ -69,7 +73,7 @@ function App(props) {
       return
     }
 
-    const url = new URI('/rest/query')
+    const url = new URI('/api/query')
       .setSearch('from', from)
       .setSearch('to', to)
       .setSearch('date', dayjs(departDate).format('YYYY-MM-DD'))
@@ -112,7 +116,14 @@ function App(props) {
         dispatch(setDepartStations(depStation))
         dispatch(setArriveStations(arrStation))
       })
-  }, [from, to])
+  }, [from, to, departDate])
+
+  const { isPrevDisabled, isNextDisabled, prev, next } = useNav(
+    departDate,
+    dispatch,
+    prevDate,
+    nextDate
+  )
 
   if (!searchParsed) {
     return null
@@ -123,8 +134,16 @@ function App(props) {
       <div className="header-wrapper">
         <Header title={`${from}-${to}`} onBack={onBack} />
       </div>
-      <Nav />
-      <List />
+      <div className="nav-wrapper">
+        <Nav
+          date={departDate}
+          isPrevDisabled={isPrevDisabled}
+          isNextDisabled={isNextDisabled}
+          prev={prev}
+          next={next}
+        />
+      </div>
+      <List list={trainList} />
       <Bottom />
     </div>
   )
