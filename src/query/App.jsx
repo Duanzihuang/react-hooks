@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { connect } from 'react-redux'
 import './App.css'
 import URI from 'urijs'
@@ -9,6 +9,7 @@ import Header from '../common/Header'
 import { h0 } from '../common/fp'
 import dayjs from 'dayjs'
 import useNav from '../common/useNav'
+import { bindActionCreators } from 'redux'
 
 import {
   setFrom,
@@ -22,7 +23,11 @@ import {
   setDepartStations,
   setArriveStations,
   prevDate,
-  nextDate
+  nextDate,
+  toggleHighSpeed,
+  toggleOrderType,
+  toggleOnlyTickets,
+  toggleIsFiltersVisible
 } from './actions'
 
 function App(props) {
@@ -31,10 +36,11 @@ function App(props) {
     from,
     to,
     departDate,
-    highSpeed,
     searchParsed,
+    highSpeed,
     orderType,
     onlyTickets,
+    isFiltersVisible,
     checkedTicketTypes,
     checkedTrainTypes,
     checkedDepartStations,
@@ -116,7 +122,7 @@ function App(props) {
         dispatch(setDepartStations(depStation))
         dispatch(setArriveStations(arrStation))
       })
-  }, [from, to, departDate])
+  }, [from, to, departDate, highSpeed, orderType, onlyTickets])
 
   const { isPrevDisabled, isNextDisabled, prev, next } = useNav(
     departDate,
@@ -124,6 +130,19 @@ function App(props) {
     prevDate,
     nextDate
   )
+
+  // 设置Bottom的callback
+  const bottomCbs = useMemo(() => {
+    return bindActionCreators(
+      {
+        toggleHighSpeed,
+        toggleOrderType,
+        toggleOnlyTickets,
+        toggleIsFiltersVisible
+      },
+      dispatch
+    )
+  }, [])
 
   if (!searchParsed) {
     return null
@@ -144,7 +163,13 @@ function App(props) {
         />
       </div>
       <List list={trainList} />
-      <Bottom />
+      <Bottom
+        highSpeed={highSpeed}
+        orderType={orderType}
+        onlyTickets={onlyTickets}
+        isFiltersVisible={isFiltersVisible}
+        {...bottomCbs}
+      />
     </div>
   )
 }
