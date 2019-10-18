@@ -59,6 +59,10 @@ export default {
     switch (type) {
       case ACTION_SET_HIGH_SPEED:
         return payload
+      case ACTION_SET_CHECKED_TRAIN_TYPES:
+        // console.log('payload is ',payload)
+        const checkedTrainTypes = payload
+        return Boolean(checkedTrainTypes[1] && checkedTrainTypes[5])
       default:
     }
 
@@ -129,6 +133,18 @@ export default {
     switch (type) {
       case ACTION_SET_CHECKED_TRAIN_TYPES:
         return payload
+
+      case ACTION_SET_HIGH_SPEED:
+        const highSpeed = payload
+        // console.log('highSpeed is ', highSpeed)
+
+        const newCheckedTicketTypes = { ...state }
+        if (highSpeed) {
+          newCheckedTicketTypes[1] = true
+          newCheckedTicketTypes[5] = true
+        }
+
+        return newCheckedTicketTypes
       default:
     }
 
