@@ -8,4 +8,16 @@ import reducers from './reducers'
  * 参数2：state的默认值
  * 参数3：中间件
  */
-export default createStore(combineReducers(reducers),{},applyMiddleware(thunk))
+export default createStore(combineReducers(reducers),{
+    departDate: Date.now(),
+    arriveDate: Date.now(),
+    departTimeStr: null,
+    arriveTimeStr: null,
+    departStation: null,
+    arriveStation: null,
+    trainNumber: null,
+    durationStr: null,
+    tickets: [],
+    isScheduleVisible: false,
+    searchParsed: false
+},applyMiddleware(thunk))
